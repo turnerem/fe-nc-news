@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@reach/router'
-import { formatTimeDate } from './utils/utils'
+import { formatDate } from './utils/utils'
 
 const ArtSmCard = ({ article }) => {
   const { 
@@ -20,7 +20,7 @@ const ArtSmCard = ({ article }) => {
         </Link>
       
       </div>
-      <div className='created-at'>{formatTimeDate(created_at)}</div>
+      <div className='created-at'>{formatDate(created_at)}</div>
       <div className='counts'>
         <p>votes: {votes} comments: {comment_count}</p>
         {/* <p></p>   */}
