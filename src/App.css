@@ -1,0 +1,113 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.route {
+  display: grid;
+  grid-template-rows: 100px auto;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 110%;
+}
+
+h2 {
+  text-align: left;
+  font-size: 40px;
+}
+
+.Articles {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.art-sm-card {
+  display: grid;
+  justify-content: center;
+  grid-template-areas:
+    'title-author created-at'
+    'title-author counts';
+  grid-template-columns: 400px 200px;
+  border: 1px solid black;
+
+}
+
+.art-sm-card > div {
+  border: 1px solid black;
+}
+
+hr {
+  margin: 20px 0;
+  border: 1px solid grey;
+}
+
+.title-author {
+  grid-row: 1 / span 2;
+  text-align: left;
+  font-size: 90%;
+}
+
+span {
+  font-size: 110%;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.created-at {
+  text-align: right;
+  font-size: 90%;
+}
+
+.counts {
+  text-align: right;
+  font-size: 90%;
+  grid-column: 2 / span 1;
+}
+
+.counts > p {
+  margin-left: 10px;
+}

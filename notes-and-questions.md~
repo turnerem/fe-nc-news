@@ -1,0 +1,16 @@
+## Notes
+- To have  alogin page? Will need to think about how employer would provide default info.
+  - Would need to try having authentication area.
+- Or default login jessjelly
+
+- making requests to heroku: read notes to solve CORS error
+
+- make most of routing - to make site feel bigger
+
+- read into hooks. To use?
+
+## Questions
+- is there just one <Router> in the entire frontend?
+
+## Ideally
+- ArtSmCard: want entire article name + author area to be clickable like a button without horrible lines around it
