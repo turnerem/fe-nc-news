@@ -40,8 +40,8 @@ exports.formatTimeDate = (dateString) => {
     amPm = 'pm'
   } 
   const minute = date.getMinutes();
-
-  return `${hour}:${minute}${amPm}, ${day} ${month} ${year}`
+  const minuteStr = minute < 10 ? '0' + minute : '' + minute;
+  return `${hour}:${minuteStr}${amPm}, ${day} ${month} ${year}`
 
 }
 

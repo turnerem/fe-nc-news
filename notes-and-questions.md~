@@ -10,7 +10,8 @@
 - read into hooks. To use?
 
 ## Questions
-- is there just one <Router> in the entire frontend?
+- Articles holds all articles including art body. Can click on article to navigate to page Article. This updates query with article\_id.
+  - But (QUESTION) do not need to make fresh axios request for article with this id. Just need that id to get the associated comments.
 
 ## Ideally
 - ArtSmCard: want entire article name + author area to be clickable like a button without horrible lines around it

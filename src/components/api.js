@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { URL } from '../url'
 
-export const getArticles = async params => {
-  const { data: {articles} = {} } = await axios.get(`${URL}/articles`, { params })
-  // console.log(articles, 'srticles in api')
-  return articles
+export const getData = async (key, endpoint, params) => {
+  const { data } = await axios.get(`${URL}/${endpoint}`, { params })
+  return data[key]
 }

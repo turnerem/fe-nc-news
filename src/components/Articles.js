@@ -5,18 +5,15 @@ import ArtSmCard from './ArtSmCard';
 
 class Articles extends Component {
   state = {
-    articles: [],
-    params: this.props.params
+    articles: []
   }
 
   componentDidMount = () => {
     // axios request for 10 MOST RECENT articles
-    const { params } = this.state;
-    api.getArticles(params)
+    const { params } = this.props;
+    api.getData('articles', 'articles', params)
       .then((articles) => {
         this.setState({ articles })
-        console.log(typeof articles[0].created_at, 'date type')
-
       })
   }
   

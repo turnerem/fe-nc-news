@@ -15,7 +15,7 @@ const ArtSmCard = ({ article }) => {
 
 
       <div className='title-author'>
-        <Link to={`/articles/${article_id}`} >
+        <Link to={`/article/${article_id}`} >
           <span>{title}</span>{author}
         </Link>
       
