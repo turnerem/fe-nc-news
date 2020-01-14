@@ -3,6 +3,7 @@ import * as api from './api';
 import ArtBigCard from './ArtBigCard';
 // import Comments from './Comments';
 import CommentCard from './CommentCard';
+import Comments from './Comments';
 
 class Article extends Component {
   state = {
@@ -12,33 +13,25 @@ class Article extends Component {
 
   componentDidMount = () => {
     const { article_id } = this.props;
-    const params = { limit: 3 }
-    console.log('the params', params)
+    // console.log('the params', params)
     api.getData('article', `articles/${article_id}`)
       .then((article) => {
         console.log(article, 'supposedly article on mount')
         this.setState({ article })
       })
-    api.getData('comments', `articles/${article_id}/comments`, params)
-      .then((comments) => {
-        console.log(comments, 'comments from api')
-        this.setState({ comments })
-      })
 
   }
 
   render() {
-    const { article, comments } = this.state;
-    console.log(comments, 'comments in render')
+    const { article } = this.state;
+    const { article_id } = this.props;
+    // console.log(comments, 'comments in render')
     return (
       <div>
         <ArtBigCard article={article} />
-        <ul>
-          {comments.map((comment) => {
-            return <CommentCard comment={comment} commentSm={true} key={comment.comment_id}/>
-          })}
-        </ul>
-        <p>Button here to expand and show more comments</p>
+        {/* POST comment */}
+        {/* Comments */}
+        <Comments article_id={article_id} />
         
       </div>
     );

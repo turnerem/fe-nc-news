@@ -1,23 +1,45 @@
 import React, { Component } from 'react';
+import CommentCard from './CommentCard';
+import * as api from './api'
 
 class Comments extends Component {
   state = {
-    comments: []
+    comments: [],
+    commentSm: true,
+    params: {
+      limit: 3
+    }
   }
 
   componentDidMount = () => {
+    const params = this.state
+    const { article_id } = this.props
+    api.getData('comments', `articles/${article_id}/comments`, params)
+      .then((comments) => {
+        console.log(comments, 'comments from api')
+        this.setState({ comments })
+      })
 
   }
   render() {
     // if (only renderig some comments) {do this}
     // else {do that}
-    console.log(this.props)
+    const { commentSm, comments } = this.state;
+    // console.log(this.props)
     return (
-      <div>
-        <h2>Article Name</h2>
-        <h3>Comments</h3>
-      </div>
-    );
+      <react>
+        <ul>
+           {comments.map((comment) => {
+             return <CommentCard comment={comment} commentSm={commentSm} key={comment.comment_id}/>
+           })}
+        </ul>
+        <button onClick={this.handleShowMore} value='10'>show more</button>
+      </react>
+      );
+  }
+
+  handleShowMore = (event) => {
+
   }
 }
 

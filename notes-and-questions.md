@@ -22,3 +22,7 @@
 
 ### Tomorrow
 - Make Articles component work within Home, Topic. How to pass in correct params and remember ultiple changes to params?
+- Decide how to show comments
+  - small view of top three at bottom of article
+  - Larger view (also at bottom of A) shows top 3 expanded, and then 10 (other) most recent. All expanded?
+    - Perhaps better (in both large and small view) to allow expansion of text on an article by article basis)

@@ -8,13 +8,14 @@ class Articles extends Component {
     articles: [],
     params: {
       sort_by: 'created_at',
-      order: 'desc'
+      order: 'desc',
+      topic: this.props.topic
     }
   }
 
   componentDidMount = () => {
     // axios request for 10 MOST RECENT articles
-    const { params } = this.props;
+    const { params } = this.state;
     api.getData('articles', 'articles', params)
       .then((articles) => {
         this.setState({ articles })
