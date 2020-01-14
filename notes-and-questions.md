@@ -17,3 +17,8 @@
 
 ## Ideally
 - ArtSmCard: want entire article name + author area to be clickable like a button without horrible lines around it
+- POST article functionality
+
+
+### Tomorrow
+- Make Articles component work within Home, Topic. How to pass in correct params and remember ultiple changes to params?

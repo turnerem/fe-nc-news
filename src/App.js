@@ -17,7 +17,7 @@ function App() {
       <Router className='route'>
         <Home path='/' />
         <Topics path='/topics' />
-        <Topic path='/topics/:topic_id' />
+        <Topic path='/topics/:slug' />
         <Article path='/article/:article_id' />
         <Comments path='/article/:article_id/comments' />
       </Router>
