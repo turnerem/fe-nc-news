@@ -19,7 +19,6 @@ class Articles extends Component {
 
   componentDidUpdate  (prevProps)  {
     const { sort_by, order } = this.props.params
-    console.log(prevProps, 'prev props\n\n', this.props, 'new props?')
     if (sort_by !== prevProps.params.sort_by || order !== prevProps.params.order) {
       const { params } = this.props;
 
@@ -32,9 +31,10 @@ class Articles extends Component {
   
   render() {
     const { articles } = this.state;
+    const { order } = this.props.params;
     return (
       <div>
-        <SortDocs handleClick={this.handleClick}/>
+        <SortDocs handleClick={this.handleClick} order={order} />
         <ul>
           {
             articles.map(article => {
@@ -49,9 +49,7 @@ class Articles extends Component {
   handleClick = (event) => {
     const { value } = event.target
     const setKey = (['asc', 'desc'].includes(value)) ? 'order' : 'sort_by'
-    console.log('old params', this.props.params)
     this.props.params[setKey] = value;
-    console.log('new params', this.props.params)
     
     const { params } = this.props;
     
