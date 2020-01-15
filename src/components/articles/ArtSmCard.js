@@ -19,9 +19,11 @@ const ArtSmCard = ({ article }) => {
     <li className='art-sm-card'>
       <Link to={`/article/${article_id}`} >
       {/* <button> */}
-        <p className='title-author'><span>{title}</span>{author}</p>
         <p className='created-at'>{formatDate(created_at)}</p>
-        <p className='counts'>votes: {votes} comments: {comment_count}</p>
+        <p className='votes'>votes: {votes}</p>
+        <p className='comments'>comments: {comment_count}</p>
+        <h4 className='title'>{title}</h4>
+        <h5 className='author'>{author}</h5>
       {/* </button> */}
 
       </Link>

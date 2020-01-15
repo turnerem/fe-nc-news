@@ -11,9 +11,11 @@ class CommentCard extends Component {
     const { commentSm } = this.state;
     let newBody = (commentSm && body.length > 97) ? body.substring(0, 97) + '...' : body;
     return (
-      <li>
+      <li className='comment-card'>
         <button onClick={this.resizeText}>
-          <p><span>{author}</span>{formatTimeDate(created_at)}, votes: {votes}</p>
+          <p className='created-at'>{formatTimeDate(created_at)}</p>
+          <p className='votes'>votes: {votes}</p>
+          <h5 className='author'>{author}</h5>
           <p>{newBody}</p>
         </button>
       </li>

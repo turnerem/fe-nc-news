@@ -18,7 +18,7 @@ class Topics extends Component {
     return (
       <div>
         <Header />
-        <h1>All Topics</h1>
+        <h3>All Topics</h3>
         <ul>
           {topics.map(topic => {
             return <TopicCard topic={topic} key={topic.slug} />
