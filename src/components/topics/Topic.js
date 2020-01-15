@@ -3,12 +3,13 @@ import Articles from '../articles/Articles';
 
 class Topic extends Component {
   render() {
-    const { topic } = this.props;
+    const { slug, description, limit } = this.props;
     return (
 
       <div>
-        <h2>Topic: {topic}</h2>
-        <Articles topic={topic} />
+        <h2>Topic: {slug}</h2>
+        <p>{description}</p>
+        <Articles topic={slug} limit={limit} />
       </div>
     );
   }

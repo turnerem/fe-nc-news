@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../api'
 import TopicCard from './TopicCard';
+import Header from '../Header';
 
 class Topics extends Component {
   state = {
@@ -16,7 +17,8 @@ class Topics extends Component {
     const { topics } = this.state;
     return (
       <div>
-        <h2>All Topics</h2>
+        <Header />
+        <h1>All Topics</h1>
         <ul>
           {topics.map(topic => {
             return <TopicCard topic={topic} key={topic.slug} />

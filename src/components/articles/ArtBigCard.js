@@ -3,18 +3,18 @@ import { formatDate } from '../utils/utils'
 
 const ArtBigCard = ({ article }) => {
   const { 
-    title, author, 
+    topic, title, author, 
     body,
     created_at, 
-    votes, comment_count,
-    article_id } = article;
+    votes, comment_count } = article;
   return (
-    <div>
-      <h2>{title} {formatDate(created_at)}</h2>
+    <>
+      <h3>{topic}: {title}<span>votes: {votes} comments: {comment_count}</span></h3>
+      <h4>{author} {formatDate(created_at)}</h4>
       <p>
         {body}
       </p>
-    </div>
+    </>
   );
 };
 

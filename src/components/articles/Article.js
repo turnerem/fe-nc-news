@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import * as api from '../api';
 import ArtBigCard from './ArtBigCard';
 import Comments from '../comments/Comments';
+import Header from '../Header';
 
 class Article extends Component {
   state = {
     article: {},
-    comments: []
+    comments: [],
+    isLoading: true
   }
 
   componentDidMount = () => {
@@ -14,24 +16,30 @@ class Article extends Component {
     // console.log('the params', params)
     api.getData('article', `articles/${article_id}`)
       .then((article) => {
-        console.log(article, 'supposedly article on mount')
-        this.setState({ article })
+        this.setState({ article, isLoading: false })
       })
 
   }
 
   render() {
-    const { article } = this.state;
+    const { article, isLoading } = this.state;
     const { article_id } = this.props;
     // console.log(comments, 'comments in render')
     return (
-      <div>
+      <>
+      <Header />
+      {isLoading ? (<p>Loading...</p>) 
+      : (
+      <>
         <ArtBigCard article={article} />
-        {/* POST comment */}
-        {/* Comments */}
-        <Comments article_id={article_id} />
+
+        <Comments article_id={article_id} comment_count={article.comment_count} />
         
-      </div>
+      </>
+      )
+      }
+      
+      </>
     );
   }
 

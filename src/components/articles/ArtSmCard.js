@@ -9,22 +9,22 @@ const ArtSmCard = ({ article }) => {
     votes, comment_count,
     article_id
   } = article;
+
+  // const goToNewView = () => {
+  //   return <Article
+  //   return <Link to= />
+  // }
+
   return (
     <li className='art-sm-card'>
-      
+      <Link to={`/article/${article_id}`} >
+      {/* <button> */}
+        <p className='title-author'><span>{title}</span>{author}</p>
+        <p className='created-at'>{formatDate(created_at)}</p>
+        <p className='counts'>votes: {votes} comments: {comment_count}</p>
+      {/* </button> */}
 
-
-      <div className='title-author'>
-        <Link to={`/article/${article_id}`} >
-          <span>{title}</span>{author}
-        </Link>
-      
-      </div>
-      <div className='created-at'>{formatDate(created_at)}</div>
-      <div className='counts'>
-        <p>votes: {votes} comments: {comment_count}</p>
-        {/* <p></p>   */}
-      </div>
+      </Link>
     </li>
     // <hr />
   );

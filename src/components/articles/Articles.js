@@ -9,8 +9,10 @@ class Articles extends Component {
     params: {
       sort_by: 'created_at',
       order: 'desc',
-      topic: this.props.topic
-    }
+      topic: this.props.topic,
+      limit: this.props.limit
+    },
+    isLoading: true
   }
 
   componentDidMount = () => {
@@ -18,26 +20,15 @@ class Articles extends Component {
     const { params } = this.state;
     api.getData('articles', 'articles', params)
       .then((articles) => {
-        this.setState({ articles })
+        this.setState({ articles, isLoading: false })
       })
   }
-
-  // componentDidUpdate  (prevProps)  {
-  //   const { sort_by, order } = this.props.params
-  //   if (sort_by !== prevProps.params.sort_by || order !== prevProps.params.order) {
-  //     const { params } = this.props;
-
-  //     api.getData('articles', 'articles', params)
-  //     .then((articles) => {
-  //       this.setState({ articles })
-  //     })     
-  //   }
-  // }
   
   render() {
-    const { articles } = this.state;
+    const { articles, isLoading } = this.state;
     const { order } = this.state.params;
-    return (
+    return isLoading ? <p className='loading-page'>Loading...</p>
+      : (
       <div>
         <SortDocs handleClick={this.handleClick} order={order} />
         <ul>

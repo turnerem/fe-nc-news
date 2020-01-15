@@ -19,17 +19,13 @@ class Comments extends Component {
       .then((comments) => {
         // console.log(comments, 'comments from api')
         this.setState({ comments })
-
       })
-
   }
 
   render() {
-    // if (only renderig some comments) {do this}
-    // else {do that}
     const { comments } = this.state;
     const { limit } = this.state.params;
-    console.log('n comments', comments.length, 'limit', limit)
+    const { comment_count } = this.props;
     return (
       <div>
         <PostComment handlePost={this.handlePost} />
@@ -38,7 +34,7 @@ class Comments extends Component {
              return <CommentCard comment={comment} key={comment.comment_id}/>
            })}
         </ul>
-        {(comments.length < limit) ? (<p>that's all</p>) : (<button onClick={this.handleShowMore} value={limit}>more</button>)
+        {(comment_count <= limit) ? (<p>that's all</p>) : (<button onClick={this.handleShowMore} value={limit}>more</button>)
           }
         
       </div>
