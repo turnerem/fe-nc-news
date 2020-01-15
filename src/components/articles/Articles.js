@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import * as api from './api';
-import SortDocs from './SortDocs';
+import * as api from '../api';
+import SortDocs from '../SortDocs';
 import ArtSmCard from './ArtSmCard';
 
 class Articles extends Component {

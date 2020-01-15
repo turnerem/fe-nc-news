@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as api from './api'
+import * as api from '../api'
 import TopicCard from './TopicCard';
 
 class Topics extends Component {

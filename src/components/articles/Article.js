@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import * as api from './api';
+import * as api from '../api';
 import ArtBigCard from './ArtBigCard';
-import Comments from './Comments';
+import Comments from '../comments/Comments';
 
 class Article extends Component {
   state = {

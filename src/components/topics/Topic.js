@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Articles from './Articles';
+import Articles from '../articles/Articles';
 
 class Topic extends Component {
   render() {

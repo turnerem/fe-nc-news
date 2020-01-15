@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@reach/router'
-import { formatDate } from './utils/utils'
+import { formatDate } from '../utils/utils'
 
 const ArtSmCard = ({ article }) => {
   const { 
