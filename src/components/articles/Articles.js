@@ -52,8 +52,9 @@ class Articles extends Component {
   }
 
   handleClick = (event) => {
-    const { params } = this.state;
     const { value } = event.target
+    
+    const { params } = this.state;
     const setKey = (['asc', 'desc'].includes(value)) ? 'order' : 'sort_by'
     params[setKey] = value;
     

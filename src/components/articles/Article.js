@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import * as api from './api';
 import ArtBigCard from './ArtBigCard';
-// import Comments from './Comments';
-import CommentCard from './CommentCard';
 import Comments from './Comments';
 
 class Article extends Component {
