@@ -7,13 +7,13 @@ const ArtBigCard = ({ article }) => {
     topic, title, author, 
     body,
     created_at, article_id,
-    votes, comment_count } = article;
+    votes } = article;
 
   const patch = { key: 'article', endpoint: `articles/${article_id}`}
 
   return (
     <>
-      <h3>{topic}: {title}<span role='img' aria-label='comments'>💬</span>: {comment_count}</h3>
+      <h3>{topic}: {title}</h3>
       <h4>{author} {formatDate(created_at)}</h4>
       <p>
         {body}

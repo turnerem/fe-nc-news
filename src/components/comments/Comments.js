@@ -10,7 +10,9 @@ class Comments extends Component {
     params: {
       limit: 3
     },
-    currentUser: 'jessjelly'
+    currentUser: 'jessjelly',
+    toDelete: null,
+    countChange: 0
 
   }
 
@@ -24,13 +26,30 @@ class Comments extends Component {
       })
   }
 
+  componentDidUpdate = (prevProps, { comments }) => {
+    // console.log('prev', prevState.comments.length, 'curr', this.state)
+    if (comments.length > this.state.comments.length) {
+      console.log('to be deleted', this.state.toDelete)
+      api.deleteData(`comments/${this.state.toDelete}`)
+        .then((data) => {
+          console.log('successful delete, this returned', data)
+        })
+        .catch(err => {console.log('an err', err)})
+
+      this.setState({ toDelete: null })
+      
+    }
+
+  }
+
   render() {
-    const { comments, currentUser } = this.state;
+    const { comments, currentUser, countChange } = this.state;
     const { limit } = this.state.params;
     const { comment_count } = this.props;
     return (
       <div>
         <PostComment handlePost={this.handlePost} />
+        <p><span role='img' aria-label='comments'>💬</span>: {1 * comment_count + countChange}</p>
         <ul>
            {comments.map((comment) => {
              return <CommentCard comment={comment} currentUser={currentUser} key={comment.comment_id} deleteComment={this.deleteComment}/>
@@ -56,11 +75,11 @@ class Comments extends Component {
       votes: 0,
       article_id: 'newComment'
     }
-    this.setState(({comments}) => {
+    this.setState(({comments, countChange}) => {
       const newComments = [...comments]
       // newComments.pop()
       newComments.unshift(userComment)
-      return { comments: newComments }
+      return { comments: newComments, countChange: countChange + 1 }
     })
     const toPost = {username: currentUser, body: value}
     api.postData('comment', `articles/${article_id}/comments`, 
@@ -89,11 +108,14 @@ class Comments extends Component {
   }
 
   deleteComment = (comment_id) => {
-    api.deleteData(`comments/${comment_id}`)
-      .then((data) => {
-        console.log('successful delete, this returned', data)
+    console.log('back in comments with ', this.state.currentUser)
+    this.setState((currentState) => {
+      const { comments, countChange } = currentState;
+      const newComments = comments.filter(comment => {
+        return comment.comment_id !== comment_id
       })
-      .catch(err => {console.log('an err', err)})
+      return { comments: newComments, toDelete: comment_id, countChange: countChange - 1}
+    })
   }
 }
 

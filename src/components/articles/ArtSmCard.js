@@ -7,7 +7,7 @@ const ArtSmCard = ({ article }) => {
     title, author, 
     created_at, 
     votes, comment_count,
-    article_id
+    article_id, topic
   } = article;
 
   // const goToNewView = () => {
@@ -24,7 +24,7 @@ const ArtSmCard = ({ article }) => {
             <span role='img' aria-label='comment-count'>💬</span>: {comment_count}
           </p>
         </div>
-      <Link to={`/article/${article_id}`} className='title-author'>
+      <Link to={`/topics/${topic}/${article_id}`} className='title-author'>
         {/* <div className='title-author'> */}
           <h4 className='title'>{title}</h4>
           <h5 className='author'>{author}</h5>
