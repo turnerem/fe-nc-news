@@ -17,7 +17,6 @@ const ArtSmCard = ({ article }) => {
 
   return (
     <li className='art-sm-card'>
-      <Link to={`/article/${article_id}`} >
         <div className='time-and-counts'>
           <p className='created-at'>{formatDate(created_at)}</p>
           <p className='counts'>
@@ -25,10 +24,11 @@ const ArtSmCard = ({ article }) => {
             <span role='img' aria-label='comment-count'>💬</span>: {comment_count}
           </p>
         </div>
-        <div className='title-author'>
+      <Link to={`/article/${article_id}`} className='title-author'>
+        {/* <div className='title-author'> */}
           <h4 className='title'>{title}</h4>
           <h5 className='author'>{author}</h5>
-        </div>
+        {/* </div> */}
       </Link>
     </li>
     // <hr />

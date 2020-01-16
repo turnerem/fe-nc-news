@@ -16,3 +16,9 @@ export const patchData = async (key, endpoint, patchData) => {
   console.log(data, 'data in patchData\n\n')
   return data[key]
 }
+
+export const deleteData = async (endpoint) => {
+  const { data } = await axios.delete(`${URL}/${endpoint}`)
+  console.log(data, 'deleted data')
+  return data
+}

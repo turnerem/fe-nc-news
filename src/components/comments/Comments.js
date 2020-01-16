@@ -9,7 +9,9 @@ class Comments extends Component {
     // commentSm: true,
     params: {
       limit: 3
-    }
+    },
+    currentUser: 'jessjelly'
+
   }
 
   componentDidMount = () => {
@@ -23,7 +25,7 @@ class Comments extends Component {
   }
 
   render() {
-    const { comments } = this.state;
+    const { comments, currentUser } = this.state;
     const { limit } = this.state.params;
     const { comment_count } = this.props;
     return (
@@ -31,7 +33,7 @@ class Comments extends Component {
         <PostComment handlePost={this.handlePost} />
         <ul>
            {comments.map((comment) => {
-             return <CommentCard comment={comment} key={comment.comment_id}/>
+             return <CommentCard comment={comment} currentUser={currentUser} key={comment.comment_id} deleteComment={this.deleteComment}/>
            })}
         </ul>
         {(comment_count <= limit) ? (<p>that's all</p>) : (<button onClick={this.handleShowMore} value={limit}>more</button>)
@@ -46,7 +48,7 @@ class Comments extends Component {
 
     const { value } = event.target[0]
     const { article_id } = this.props
-    const currentUser = 'jessjelly'
+    const { currentUser } = this.state
     const userComment = {
       author: currentUser,
       body: value,
@@ -84,10 +86,14 @@ class Comments extends Component {
 
       return { params }
     })
+  }
 
-
-
-
+  deleteComment = (comment_id) => {
+    api.deleteData(`comments/${comment_id}`)
+      .then((data) => {
+        console.log('successful delete, this returned', data)
+      })
+      .catch(err => {console.log('an err', err)})
   }
 }
 
