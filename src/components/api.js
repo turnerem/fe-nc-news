@@ -8,6 +8,11 @@ export const getData = async (key, endpoint, params) => {
 
 export const postData = async (key, endpoint, postData) => {
   const { data } = await axios.post(`${URL}/${endpoint}`, postData)
-  console.log(data, 'data in postData\n\n')
+  return data[key]
+}
+
+export const patchData = async (key, endpoint, patchData) => {
+  const { data } = await axios.patch(`${URL}/${endpoint}`, patchData)
+  console.log(data, 'data in patchData\n\n')
   return data[key]
 }
