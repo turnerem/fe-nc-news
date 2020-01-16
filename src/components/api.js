@@ -2,8 +2,13 @@ import axios from 'axios'
 import { URL } from '../url'
 
 export const getData = async (key, endpoint, params) => {
-  const { data } = await axios.get(`${URL}/${endpoint}`, { params })
-  return data[key]
+  // try {
+    const { data } = await axios.get(`${URL}/${endpoint}`, { params })
+    return data[key]
+
+  // } catch(err) {
+  //   console.log(err, 'async err')
+  // }
 }
 
 export const postData = async (key, endpoint, postData) => {

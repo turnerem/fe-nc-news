@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as api from '../api';
 import SortDocs from '../SortDocs';
 import ArtSmCard from './ArtSmCard';
+import ErrorDisplay from '../ErrorDisplay';
 
 class Articles extends Component {
   state = {
@@ -12,7 +13,9 @@ class Articles extends Component {
       topic: this.props.topic,
       limit: this.props.limit
     },
-    isLoading: true
+    isLoading: true,
+    err: {},
+    errFlag: false
   }
 
   componentDidMount = () => {
@@ -22,27 +25,34 @@ class Articles extends Component {
       .then((articles) => {
         this.setState({ articles, isLoading: false })
       })
-      .catch(err => {
-        console.dir(err, 'err after Art request')
-
+      .catch(({ response }) => {
+        const { msg } = response.data;
+        const { status } = response
+        // console.log(err.response, 'err after Art request')
+        this.setState({ err: { status, msg }, errFlag: true, isLoading: false})
       })
   }
   
   render() {
-    const { articles, isLoading } = this.state;
+    const { articles, isLoading, errFlag, err } = this.state;
     const { order } = this.state.params;
+    console.log('THE ERROR IN ARTICLES', err)
     return isLoading ? <p className='loading-page'>Loading...</p>
       : (
-      <div>
-        <SortDocs handleClick={this.handleClick} order={order} />
-        <ul>
-          {
-            articles.map(article => {
-              return <ArtSmCard article={article} key={article.article_id}/>
-            })
-          }
-        </ul>
-      </div>
+        (errFlag) ? (<ErrorDisplay {...err} />)
+        : (
+          <div>
+            <SortDocs handleClick={this.handleClick} order={order} />
+            <ul>
+              {
+                articles.map(article => {
+                  return <ArtSmCard article={article} key={article.article_id}/>
+                })
+              }
+            </ul>
+          </div>
+
+        )
     );
   }
 
