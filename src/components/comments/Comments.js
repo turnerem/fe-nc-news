@@ -66,29 +66,33 @@ class Comments extends Component {
     event.preventDefault();
 
     const { value } = event.target[0]
-    const { article_id } = this.props
-    const { currentUser } = this.state
-    const userComment = {
-      author: currentUser,
-      body: value,
-      created_at: Date.now(),
-      votes: 0,
-      article_id: 'newComment'
-    }
-    this.setState(({comments, countChange}) => {
-      const newComments = [...comments]
-      // newComments.pop()
-      newComments.unshift(userComment)
-      return { comments: newComments, countChange: countChange + 1 }
-    })
-    const toPost = {username: currentUser, body: value}
-    api.postData('comment', `articles/${article_id}/comments`, 
-      toPost)
-        .then(response => {
-          console.log(response, 'response after posting')
-        })
-        .catch(err => console.log(err, 'err after post'))
+    if (value.length > 0) {
+      // event.target[0] = '';
+  
+      const { article_id } = this.props
+      const { currentUser } = this.state
+      const userComment = {
+        author: currentUser,
+        body: value,
+        created_at: Date.now(),
+        votes: 0,
+        article_id: 'newComment'
+      }
+      this.setState(({comments, countChange}) => {
+        const newComments = [...comments]
+        // newComments.pop()
+        newComments.unshift(userComment)
+        return { comments: newComments, countChange: countChange + 1 }
+      })
+      const toPost = {username: currentUser, body: value}
+      api.postData('comment', `articles/${article_id}/comments`, 
+        toPost)
+          .then(response => {
+            console.log(response, 'response after posting')
+          })
+          .catch(err => console.log(err, 'err after post'))
 
+    } 
 
   }
 

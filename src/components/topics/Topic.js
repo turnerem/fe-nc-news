@@ -4,14 +4,14 @@ import Header from '../Header';
 
 class Topic extends Component {
   render() {
-    const { slug, description, limit } = this.props;
+    const { topic, description, limit } = this.props;
     return (
 
       <div>
         <Header />
-        <h3>Topic: {slug}</h3>
+        <h3>Topic: {topic}</h3>
         <p>{description}</p>
-        <Articles topic={slug} limit={limit} />
+        <Articles topic={topic} limit={limit} />
       </div>
     );
   }

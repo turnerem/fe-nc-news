@@ -22,6 +22,10 @@ class Articles extends Component {
       .then((articles) => {
         this.setState({ articles, isLoading: false })
       })
+      .catch(err => {
+        console.dir(err, 'err after Art request')
+
+      })
   }
   
   render() {
