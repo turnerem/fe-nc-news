@@ -76,7 +76,7 @@ class Comments extends Component {
         body: value,
         created_at: Date.now(),
         votes: 0,
-        article_id: 'newComment'
+        article_id: 'newComm'
       }
       this.setState(({comments, countChange}) => {
         const newComments = [...comments]

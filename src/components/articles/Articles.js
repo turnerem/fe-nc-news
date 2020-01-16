@@ -7,20 +7,21 @@ import ErrorDisplay from '../ErrorDisplay';
 class Articles extends Component {
   state = {
     articles: [],
-    params: {
-      sort_by: 'created_at',
-      order: 'desc',
-      topic: this.props.topic,
-      limit: this.props.limit
-    },
+    p: 1,
+    sort_by: 'created_at',
+    order: 'desc',
     isLoading: true,
     err: {},
-    errFlag: false
+    errFlag: false,
+
   }
 
   componentDidMount = () => {
     // axios request for 10 MOST RECENT articles
-    const { params } = this.state;
+    const { p, sort_by, order } = this.state;
+    const { topic } = this.props;
+    const params = {p, sort_by, order, topic}
+
     api.getData('articles', 'articles', params)
       .then((articles) => {
         this.setState({ articles, isLoading: false })
@@ -34,15 +35,14 @@ class Articles extends Component {
   }
   
   render() {
-    const { articles, isLoading, errFlag, err } = this.state;
-    const { order } = this.state.params;
-    console.log('THE ERROR IN ARTICLES', err)
+    const { articles, isLoading, errFlag, err, order } = this.state;
     return isLoading ? <p className='loading-page'>Loading...</p>
       : (
         (errFlag) ? (<ErrorDisplay {...err} />)
         : (
           <div>
             <SortDocs handleClick={this.handleClick} order={order} />
+            {/* <ChangePage handleClick={this.handleClick}  /> */}
             <ul>
               {
                 articles.map(article => {
@@ -58,14 +58,23 @@ class Articles extends Component {
 
   handleClick = (event) => {
     const { value } = event.target
-    
-    const { params } = this.state;
-    const setKey = (['asc', 'desc'].includes(value)) ? 'order' : 'sort_by'
-    params[setKey] = value;
+
+    const { p, sort_by, order } = this.state;
+    const { topic } = this.props;
+    const params = {p, sort_by, order, topic}
+
+    let setKey = 'p'
+    if (['asc', 'desc'].includes(value)) {
+      setKey = 'order'
+      params[setKey] = value;
+    } else if (['created_at', 'comment_count', 'votes'].includes(value)) {
+      setKey = 'sort_by'
+      params[setKey] = value;
+    } 
     
     api.getData('articles', 'articles', params)
       .then((articles) => {
-        this.setState({ articles, params })
+        this.setState({ articles, p, sort_by, order })
       })   
   }
 }
