@@ -10,14 +10,15 @@
 - read into hooks. To use?
 
 ## Questions
-- Articles holds all articles including art body. Can click on article to navigate to page Article. This updates query with article\_id.
-  - But (QUESTION) do not need to make fresh axios request for article with this id. Just need that id to get the associated comments.
-- better to store comments in Article state or Comments state?
-  - In favour of storing in Comments: Article page will display article as soon as it gets article axios reguest back. Does not have to wait for comments data to come back also.
+How to change backend to return tot article count?
+- maybe that goes on endpoints rounter?
 
 ## Ideally
 - ArtSmCard: want entire article name + author area to be clickable like a button without horrible lines around it
 - POST article functionality
+- if comment belongs to loggedin user, make it a prettier colour
+  - when jj posts comment, it should be grey (ideally with some sort of diagonal lines) until post successful
+- refactor handleClick in Articles using that way of mapping from several vals to one val...
 
 
 ### Tomorrow
@@ -26,3 +27,12 @@
   - small view of top three at bottom of article
   - Larger view (also at bottom of A) shows top 3 expanded, and then 10 (other) most recent. All expanded?
     - Perhaps better (in both large and small view) to allow expansion of text on an article by article basis)
+- button not conditionally disappearing
+- handle redundant article route
+- allow up AND DOWN votes
+
+- rem to change backend endpoints descriptions
+
+
+
+'unlimited scrolling'
