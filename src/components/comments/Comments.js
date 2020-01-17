@@ -7,6 +7,7 @@ class Comments extends Component {
   state = {
     comments: [],
     // commentSm: true,
+    submittedPost: false,
     params: {
       limit: 3
     },
@@ -43,12 +44,12 @@ class Comments extends Component {
   }
 
   render() {
-    const { comments, currentUser, countChange } = this.state;
+    const { comments, submittedPost, currentUser, countChange } = this.state;
     const { limit } = this.state.params;
     const { comment_count } = this.props;
     return (
       <div>
-        <PostComment handlePost={this.handlePost} />
+        <PostComment handlePost={this.handlePost} submittedPost={submittedPost} />
         <p><span role='img' aria-label='comments'>💬</span>: {1 * comment_count + countChange}</p>
         <ul>
            {comments.map((comment) => {
@@ -67,8 +68,7 @@ class Comments extends Component {
 
     const { value } = event.target[0]
     if (value.length > 0) {
-      // event.target[0] = '';
-  
+      
       const { article_id } = this.props
       const { currentUser } = this.state
       const userComment = {
@@ -82,6 +82,8 @@ class Comments extends Component {
         const newComments = [...comments]
         // newComments.pop()
         newComments.unshift(userComment)
+        console.log(event.target, 'event target')
+
         return { comments: newComments, countChange: countChange + 1 }
       })
       const toPost = {username: currentUser, body: value}

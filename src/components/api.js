@@ -1,10 +1,12 @@
 import axios from 'axios'
 import { URL } from '../url'
 
-export const getData = async (key, endpoint, params) => {
+export const getData = async (key, endpoint, params={}, getTotal=false) => {
   // try {
     const { data } = await axios.get(`${URL}/${endpoint}`, { params })
-    return data[key]
+    // console.log(data, 'data from api')
+    return getTotal ? {[key]: data[key], total_count: data.total_count} : data[key]
+    // return data[key]
 
   // } catch(err) {
   //   console.log(err, 'async err')

@@ -6,10 +6,12 @@ class PostComment extends Component {
   }
   render() {
     // const { textBox } = this.state;
-    const { handlePost } = this.props
+    const { handlePost, submittedPost } = this.props
+    // submittedPost && this.setState({ textBox: '' })
+    submittedPost && this.setState({ textBox: '' })
     return (
       <form onSubmit={handlePost}>
-        <label>post comment<textarea onChange={this.handleTextInput} className='b-form-control' rows='3'></textarea></label>
+        <label>post comment<textarea onChange={this.handleTextInput} value={this.state.textBox} className='b-form-control' rows='3'></textarea></label>
         <button type='submit'>post</button>
       </form>
     );
@@ -17,9 +19,7 @@ class PostComment extends Component {
 
   handleTextInput = (event) => {
     const { value } = event.target;
-    this.setState(({textBox}) => {
-      return { textBox: textBox + value }
-    })
+    this.setState({ textBox: value })
   }
 }
 

@@ -7,12 +7,13 @@ import ErrorDisplay from '../ErrorDisplay';
 class Articles extends Component {
   state = {
     articles: [],
+    total_count: 1,
     p: 1,
     sort_by: 'created_at',
     order: 'desc',
     isLoading: true,
     err: {},
-    errFlag: false,
+    errFlag: false
 
   }
 
@@ -22,9 +23,10 @@ class Articles extends Component {
     const { topic } = this.props;
     const params = {p, sort_by, order, topic}
 
-    api.getData('articles', 'articles', params)
-      .then((articles) => {
-        this.setState({ articles, isLoading: false })
+    api.getData('articles', 'articles', params, true)
+      .then(({ articles, total_count }) => {
+        console.log(articles, 'articles from api')
+        this.setState({ articles, total_count, isLoading: false })
       })
       .catch(({ response }) => {
         const { msg } = response.data;
@@ -38,10 +40,10 @@ class Articles extends Component {
     const { articles, isLoading, errFlag, err, order } = this.state;
     return isLoading ? <p className='loading-page'>Loading...</p>
       : (
-        (errFlag) ? (<ErrorDisplay {...err} />)
+        errFlag ? (<ErrorDisplay {...err} />)
         : (
           <div>
-            <SortDocs handleClick={this.handleClick} order={order} />
+            <SortDocs handleSortClick={this.handleClick} handlePageClick={this.handlePageClick} order={order} />
             {/* <ChangePage handleClick={this.handleClick}  /> */}
             <ul>
               {
@@ -56,7 +58,24 @@ class Articles extends Component {
     );
   }
 
-  handleClick = (event) => {
+  handleSortClick = (event) => {
+    const { value } = event.target
+
+    const { p, sort_by, order } = this.state;
+    const { topic } = this.props;
+    const params = {p, sort_by, order, topic}
+
+    const setKey = (['asc', 'desc'].includes(value)) ? 'order' : 'sort_by'
+    params[setKey] = value;
+
+    api.getData('articles', 'articles', params)
+      .then((articles) => {
+        this.setState({ articles, p: 1, sort_by, order })
+      })   
+  }
+
+
+  handlePageClick = (event) => {
     const { value } = event.target
 
     const { p, sort_by, order } = this.state;
@@ -77,6 +96,8 @@ class Articles extends Component {
         this.setState({ articles, p, sort_by, order })
       })   
   }
+
+  // getSetArticles = ()
 }
 
 export default Articles;
