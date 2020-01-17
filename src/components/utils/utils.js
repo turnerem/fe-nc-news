@@ -1,4 +1,3 @@
-import * as api from '../api';
 
 exports.formatDate = (dateString) => {
   const date = new Date(dateString);

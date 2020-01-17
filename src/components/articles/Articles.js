@@ -43,7 +43,7 @@ class Articles extends Component {
         errFlag ? (<ErrorDisplay {...err} />)
         : (
           <div>
-            <SortDocs handleSortClick={this.handleClick} handlePageClick={this.handlePageClick} order={order} />
+            <SortDocs handleSortClick={this.handleSortClick} handlePageClick={this.handlePageClick} order={order} />
             {/* <ChangePage handleClick={this.handleClick}  /> */}
             <ul>
               {
@@ -70,7 +70,7 @@ class Articles extends Component {
 
     api.getData('articles', 'articles', params)
       .then((articles) => {
-        this.setState({ articles, p: 1, sort_by, order })
+        this.setState({ articles, p: 1, sort_by: params.sort_by, order: params.order })
       })   
   }
 
