@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -13,7 +13,7 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
 .App-header {
   background-color: #282c34;
@@ -48,12 +48,13 @@ nav {
   display: flex;
   justify-content: space-evenly;
   font-size: 110%;
+  border: 1px solid black;
 }
 
-h2 {
+/* h2 {
   text-align: left;
   font-size: 40px;
-}
+} */
 
 .Articles {
   display: flex;
@@ -62,36 +63,84 @@ h2 {
 }
 
 ul {
-  list-style-type: none;
-}
-
-.art-sm-card {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  all: unset;
   justify-content: center;
-  grid-template-areas:
-    'title-author created-at'
-    'title-author counts';
-  grid-template-columns: 400px 200px;
+  width: 800px;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* button {
+} */
+
+/* .art-sm-card {
+  width: 800px;
+
+} */
+
+/* .login-button {
+  all: unset;
+} */
+
+.login-button, .logged-in {
+  text-align: right;
+}
+
+.art-sm-card, .comment-card {
+  display: flex;
+  flex-direction: row;
+}
+
+.time-and-counts {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 200px;
+}
+
+.title-author {
+  /* grid-row: 1 / span 2; */
+  text-align: left;
+  font-size: 90%;
+  border: 1px solid black;
+  width: 500px;
+}
+
+  /* justify-content: center;
+  grid-template-columns: 200px 500px; */
+
+
+.comment-card > button {
+  all: unset;
   border: 1px solid black;
 
 }
 
-.art-sm-card > div {
+
+/* .title-author {
+  grid-area: 
+} */
+
+/* .art-sm-card > a > p {
   border: 1px solid black;
-}
+  display: inline-block;
+} */
 
 hr {
   margin: 20px 0;
   border: 1px solid grey;
 }
 
-.title-author {
-  grid-row: 1 / span 2;
-  text-align: left;
-  font-size: 90%;
-}
 
-span {
+
+.text-span {
   font-size: 110%;
   font-weight: 500;
   margin-right: 10px;
@@ -100,6 +149,10 @@ span {
 .created-at {
   text-align: right;
   font-size: 90%;
+}
+
+.vote-buttons {
+  display: flex;
 }
 
 .counts {
