@@ -31,7 +31,7 @@ class Article extends Component {
 
   render() {
     const { article, isLoading, errFlag, err } = this.state;
-    const { article_id } = this.props;
+    const { article_id, loggedIn, user } = this.props;
     // console.log(comments, 'comments in render')
     return (
       <>
@@ -43,7 +43,7 @@ class Article extends Component {
           <>
             <ArtBigCard article={article} />
     
-            <Comments article_id={article_id} comment_count={article.comment_count} />
+            <Comments article_id={article_id} comment_count={article.comment_count} loggedIn={loggedIn} user={user} />
             
           </>
           )

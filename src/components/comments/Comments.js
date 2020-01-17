@@ -44,16 +44,17 @@ class Comments extends Component {
   }
 
   render() {
-    const { comments, submittedPost, currentUser, countChange } = this.state;
+    const { comments, submittedPost, countChange } = this.state;
     const { limit } = this.state.params;
-    const { comment_count } = this.props;
+    const { comment_count, loggedIn, user } = this.props;
     return (
       <div>
-        <PostComment handlePost={this.handlePost} submittedPost={submittedPost} />
+        {loggedIn && (<PostComment handlePost={this.handlePost} submittedPost={submittedPost} />)}
+        
         <p><span role='img' aria-label='comments'>💬</span>: {1 * comment_count + countChange}</p>
         <ul>
            {comments.map((comment) => {
-             return <CommentCard comment={comment} currentUser={currentUser} key={comment.comment_id} deleteComment={this.deleteComment}/>
+             return <CommentCard comment={comment} currentUser={user} key={comment.comment_id} deleteComment={this.deleteComment}/>
            })}
         </ul>
         {(comment_count <= limit) ? (<p>that's all</p>) : (<button onClick={this.handleShowMore} value={limit}>more</button>)
