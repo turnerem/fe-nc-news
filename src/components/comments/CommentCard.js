@@ -13,23 +13,20 @@ class CommentCard extends Component {
     const { author, body, created_at, votes, comment_id } = comment;
     const { commentSm } = this.state;
     const patch = { key: 'comment', endpoint: `comments/${comment_id}`}
-    let newBody = (commentSm && body.length > 97) ? body.substring(0, 97) + '...' : body;
+    let newBody = (commentSm && body.length > 105) ? body.substring(0, 105) + '...' : body;
     return (
-      <li className='comment-card'>
+      <li className='list-group comment-card'>
           <div className='time-and-counts'>
             <p className='created-at'>{formatTimeDate(created_at)}</p>
-            {/* <p className='counts'> */}
             <VoteButton votes={votes} patch={patch}/>
-            {/* <VoteButton votes={votes} patch={patch} >
-              <span role='img' aria-label='vote-count'>👏</span>
-            </VoteButton>  : {votes} */}
-            {/* </p>           */}
           </div>
-        <button onClick={this.resizeText}>
-          <p><span className='text-span'>{author}</span>{newBody}</p>
-          {/* <DeleteBut */}
-        </button>
-        {(currentUser === author) && (<DeleteButton className='delete-button' deleteComment={() => deleteComment(comment_id)} />)}
+          {/* <div className='comment alert alert-dismissible alert-light'> */}
+            <button onClick={this.resizeText} className='comment-button'>
+              <p><span className='text-span'>{author}:</span> {newBody}</p>
+            </button>
+            {(currentUser === author) && (<DeleteButton deleteComment={() => deleteComment(comment_id)} />)}
+
+          {/* </div> */}
       </li>
     );
   }
