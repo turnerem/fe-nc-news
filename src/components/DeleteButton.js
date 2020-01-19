@@ -10,21 +10,21 @@ class DeleteButton extends Component {
     const { deleteComment } = this.props;
     if (!toDelete) {
       return (
-        <button onClick={this.deleteToggle}>
+        <button onClick={this.deleteToggle} className='delete-button'>
           delete
         </button>
   
       )
     } else {
       return (
-        <>
-        <button onClick={this.deleteToggle}>
+        <div className='def-delete'>
+        <button onClick={this.deleteToggle} className='no-delete'>
           undo
         </button>
-        <button onClick={deleteComment}>
+        <button onClick={deleteComment} className='yes-delete'>
           definitely delete
         </button>
-        </>
+        </div>
       )
     }
 
@@ -35,12 +35,6 @@ class DeleteButton extends Component {
       return { toDelete: !toDelete }
     })
   }
-
-  // deleteAction = () => {
-  //   this.setState(({toDelete}) => {
-  //     if (!toDelete) {return { toDelete: true }}
-  //   })
-  // }
 };
 
 export default DeleteButton;

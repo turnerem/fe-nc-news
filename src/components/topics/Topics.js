@@ -9,7 +9,8 @@ class Topics extends Component {
   }
   componentDidMount = () => {
     api.getData('topics', 'topics')
-      .then((topics) => {
+      .then(({topics_res}) => {
+        const { topics } = topics_res
         this.setState({ topics })
       })
   }
@@ -18,7 +19,7 @@ class Topics extends Component {
     return (
       <div>
         <Header />
-        <h3>All Topics - order me by popularity</h3>
+        <h3 className='left'>All Topics</h3>
         <ul>
           {topics.map(topic => {
             return <TopicCard topic={topic} key={topic.slug} />

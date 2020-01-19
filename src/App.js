@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+// import './bootstrap-flatly.css';
+import './layout.css';
 import { Router } from '@reach/router'
 import Home from './components/Home';
 import Topics from './components/topics/Topics';
@@ -18,14 +19,12 @@ class App extends Component {
     const {user, loggedIn} = this.state
     return (
       <div className="App">
-        <NavBar user={user} logUserIn={this.logUserIn}/>
-        {/* <Header /> */}
+        <NavBar user={user} toggleLogUserIn={this.toggleLogUserIn}/>
         <Router className='route' >
           <Home path='/' loggedIn={loggedIn}/>
           <Topics path='/topics' loggedIn={loggedIn}/>
-          {/* <LoginPage path='/login' logUserIn={this.logUserIn} msg='hi' /> */}
           <Topic path='/topics/:topic' loggedIn={loggedIn}/>
-          <Article path='/topics/:topic/:article_id' loggedIn={loggedIn} user={user}/>
+          <Article path='/articles/:article_id' loggedIn={loggedIn} user={user}/>
           <ErrorDisplay default status={404} msg='Non-existent Path' loggedIn={loggedIn}/>
         </Router>
       </div>
@@ -33,9 +32,11 @@ class App extends Component {
 
   }
 
-  logUserIn = () => {
+  toggleLogUserIn = () => {
     console.log('clicked!')
-    this.setState({ loggedIn: true, user: 'jessjelly' })
+    this.setState(({loggedIn}) => {
+      return loggedIn ? { loggedIn: false, user: ''} : { loggedIn: true, user: 'jessjelly'}
+    })
     return <Home />
   }
 }

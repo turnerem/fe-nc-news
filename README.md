@@ -19,6 +19,6 @@ Working in **Node.js**:
 ```{js}
 npm i
 
-npm run setup-dbs
+npm start
 ```
 

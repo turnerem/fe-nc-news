@@ -3,101 +3,112 @@ import * as api from '../api';
 import SortDocs from '../SortDocs';
 import ArtSmCard from './ArtSmCard';
 import ErrorDisplay from '../ErrorDisplay';
+import { debounce } from 'lodash';
 
 class Articles extends Component {
   state = {
-    articles: [],
-    total_count: 1,
+    errFlag: false,
+    hasMore: true,
+    isLoading: true,
+    loadedArticles: [],
+
     p: 1,
     sort_by: 'created_at',
-    order: 'desc',
-    isLoading: true,
-    err: {},
-    errFlag: false
+    order: 'desc'
+  }
+
+  componentDidMount() {
+    this.fetchData()
+    this.scrollEventListener();
+  }
+
+  componentDidUpdate(prevProps, {sort_by, order}) {
+    const newSort = sort_by !== this.state.sort_by
+    const newOrder = order !== this.state.order
+    if ( newSort || newOrder ) { this.fetchData() }
+  }
+  
+  render() {
+    const { errFlag, err, hasMore, isLoading, loadedArticles } = this.state;
+    return (
+      <section className='data-list'>
+        <h3 className='left'>Latest Articles</h3>
+        <SortDocs handleSort={this.handleSort} areArticles={true} />
+         <ul className='list-group'>
+          {
+            loadedArticles.map(article => {
+              return <ArtSmCard article={article} key={loadedArticles.article_id}/>
+            })
+          }
+        </ul>
+        <hr />
+        {errFlag && (<ErrorDisplay {...err} />)}
+        {isLoading && <div>Loading...</div>}
+        {!hasMore && (<div>No more articles.</div>)}
+      </section>
+
+
+    )
+  }
+
+  scrollEventListener = () => {
+    console.log('in event listener')
+    document.querySelector('.data-list').addEventListener('scroll', this.handleScroll)
+    window.addEventListener('scroll', this.handleScroll)
+  }
+
+  handleScroll = debounce((event) => {
+    const docOffset = document.documentElement.offsetHeight;
+    const windowInner = window.innerHeight;
+    const docScrollTop = document.documentElement.scrollTop
+    
+    console.log('difference: ', docOffset - windowInner - docScrollTop)
+      // 'LHS - RHS: ', window.innerHeight + document.documentElement.scrollTop - document.documentElement.offsetHeight )
+    const { errFlag, hasMore, isLoading } = this.state;
+
+    if (errFlag || !hasMore || isLoading) return;
+    if ((docOffset - windowInner - docScrollTop) < 500) {
+        console.log('condition met NOW - updating p')
+        this.setState(({p}) => {
+          return {p: p + 1}
+        })
+        this.fetchData()
+      }
+  }, 100)
+
+  handleSort = (event) => {
+    const { value } = event.target
+    const newSort = value.split(' ')[0]
+    const newOrder = value.split(' ')[1]
+    console.log('sortby', newSort, 'order', newOrder)
+
+    this.setState({ sort_by: newSort, order: newOrder, p: 1 })
 
   }
 
-  componentDidMount = () => {
-    // axios request for 10 MOST RECENT articles
-    const { p, sort_by, order } = this.state;
+  fetchData = () => {
+    const { sort_by, order, p, loadedArticles } = this.state;
+    console.log('page updating?', p)
     const { topic } = this.props;
-    const params = {p, sort_by, order, topic}
+    const params = {sort_by, order, topic, p}
 
     api.getData('articles', 'articles', params, true)
       .then(({ articles, total_count }) => {
-        console.log(articles, 'articles from api')
-        this.setState({ articles, total_count, isLoading: false })
+        const freshArticles = (p === 1) ? articles : [...loadedArticles, ...articles]
+       console.log('tot articles on page now: ', freshArticles.length)
+        this.setState({ 
+          loadedArticles: freshArticles, 
+          total_count, 
+          isLoading: false,
+          hasMore: freshArticles.length < total_count
+        })
       })
       .catch(({ response }) => {
         const { msg } = response.data;
         const { status } = response
-        // console.log(err.response, 'err after Art request')
         this.setState({ err: { status, msg }, errFlag: true, isLoading: false})
       })
   }
-  
-  render() {
-    const { articles, isLoading, errFlag, err, order } = this.state;
-    return isLoading ? <p className='loading-page'>Loading...</p>
-      : (
-        errFlag ? (<ErrorDisplay {...err} />)
-        : (
-          <div>
-            <SortDocs handleSortClick={this.handleSortClick} handlePageClick={this.handlePageClick} order={order} />
-            {/* <ChangePage handleClick={this.handleClick}  /> */}
-            <ul>
-              {
-                articles.map(article => {
-                  return <ArtSmCard article={article} key={article.article_id}/>
-                })
-              }
-            </ul>
-          </div>
-
-        )
-    );
-  }
-
-  handleSortClick = (event) => {
-    const { value } = event.target
-
-    const { p, sort_by, order } = this.state;
-    const { topic } = this.props;
-    const params = {p, sort_by, order, topic}
-
-    const setKey = (['asc', 'desc'].includes(value)) ? 'order' : 'sort_by'
-    params[setKey] = value;
-
-    api.getData('articles', 'articles', params)
-      .then((articles) => {
-        this.setState({ articles, p: 1, sort_by: params.sort_by, order: params.order })
-      })   
-  }
-
-
-  handlePageClick = (event) => {
-    const { value } = event.target
-
-    const { p, sort_by, order } = this.state;
-    const { topic } = this.props;
-    const params = {p, sort_by, order, topic}
-
-    let setKey = 'p'
-    if (['asc', 'desc'].includes(value)) {
-      setKey = 'order'
-      params[setKey] = value;
-    } else if (['created_at', 'comment_count', 'votes'].includes(value)) {
-      setKey = 'sort_by'
-      params[setKey] = value;
-    } 
-    
-    api.getData('articles', 'articles', params)
-      .then((articles) => {
-        this.setState({ articles, p, sort_by, order })
-      })   
-  }
-
-  // getSetArticles = ()
 }
 
 export default Articles;

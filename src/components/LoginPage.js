@@ -6,7 +6,7 @@ const LoginPage = ({ logUserIn }) => {
     <>
       <Header />
       <h3>Log in as jessjelly?</h3>
-      <button onClick={logUserIn}>
+      <button onClick={logUserIn} class='btn btn-outline-primary'>
         Log in
       </button>
     </>

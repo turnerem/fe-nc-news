@@ -14,8 +14,6 @@ How to change backend to return tot article count?
 - maybe that goes on endpoints rounter?
 
 ## Ideally
-- ArtSmCard: want entire article name + author area to be clickable like a button without horrible lines around it
-- POST article functionality
 - if comment belongs to loggedin user, make it a prettier colour
   - when jj posts comment, it should be grey (ideally with some sort of diagonal lines) until post successful
 - refactor handleClick in Articles using that way of mapping from several vals to one val...

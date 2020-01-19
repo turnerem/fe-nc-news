@@ -12,12 +12,15 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.1",
+    "chai": "^4.2.0",
     "cors": "^2.8.5",
+    "lodash": "^4.17.15",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
   },
   "scripts": {
+    "test-utils": "mocha src/components/utils/utils.spec.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

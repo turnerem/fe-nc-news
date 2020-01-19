@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router'
 import { formatDate } from '../utils/utils'
+import { capitalize } from '../utils/utils';
 
 const ArtSmCard = ({ article }) => {
   const { 
@@ -10,25 +11,17 @@ const ArtSmCard = ({ article }) => {
     article_id, topic
   } = article;
 
-  // const goToNewView = () => {
-  //   return <Article
-  //   return <Link to= />
-  // }
-
   return (
     <li className='art-sm-card'>
-        <div className='time-and-counts'>
+      <div className='time-and-counts'>
           <p className='created-at'>{formatDate(created_at)}</p>
-          <p className='counts'>
-            <span role='img' aria-label='vote-count'>👏</span>: {votes}
-            <span role='img' aria-label='comment-count'>💬</span>: {comment_count}
-          </p>
-        </div>
-      <Link to={`/topics/${topic}/${article_id}`} className='title-author'>
-        {/* <div className='title-author'> */}
-          <h4 className='title'>{title}</h4>
-          <h5 className='author'>{author}</h5>
-        {/* </div> */}
+          <p className='comment-count'>comments: {comment_count}</p>
+          <p className='vote-count'>votes: {votes}</p>
+      </div>
+      <Link to={`/articles/${article_id}`} className='title-author'>
+          <p className='topic'>{capitalize(topic)}</p>
+          <h5 className='title'>{title}</h5>
+          <h6 className='author'>by {author}</h6>
       </Link>
     </li>
     // <hr />

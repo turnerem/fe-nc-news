@@ -12,14 +12,15 @@ const ArtBigCard = ({ article }) => {
   const patch = { key: 'article', endpoint: `articles/${article_id}`}
 
   return (
-    <>
-      <h3>{topic}: {title}</h3>
-      <h4>{author} {formatDate(created_at)}</h4>
-      <p>
+    <div className='art-big-card'>
+      <h3>{title}</h3>
+      <h4>by <span className='text-span'>{author}</span>, {formatDate(created_at)}</h4>
+      <p className='art-body'>
         {body}
       </p>
-      <VoteButton votes={votes} patch={patch} />
-    </>
+      <p className='recommend'>Recommend this article? <VoteButton votes={votes} patch={patch} /></p>
+      
+    </div>
   );
 };
 

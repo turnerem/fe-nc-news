@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Header = ({home}) => {
+const Header = () => {
   const siteName = 'NC News';
-  return home ? (<h1 className='home-header'>{siteName}</h1>) : (<h2>{siteName}</h2>)
+  return <h1 className='banner'>{siteName}</h1>
 };
 
 export default Header;

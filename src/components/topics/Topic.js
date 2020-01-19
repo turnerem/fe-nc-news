@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Articles from '../articles/Articles';
+import Articles from '../articles/Articles_old';
 import Header from '../Header';
+import { capitalize } from '../utils/utils';
 
 class Topic extends Component {
   render() {
@@ -8,8 +9,7 @@ class Topic extends Component {
     return (
 
       <div>
-        <Header />
-        <h3>Topic: {topic}</h3>
+        <h3 className='left'>{capitalize(topic)}</h3>
         <p>{description}</p>
         <Articles topic={topic} />
       </div>

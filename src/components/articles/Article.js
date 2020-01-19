@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import * as api from '../api';
 import ArtBigCard from './ArtBigCard';
 import Comments from '../comments/Comments';
-import Header from '../Header';
 import ErrorDisplay from '../ErrorDisplay';
 
 class Article extends Component {
@@ -16,9 +15,8 @@ class Article extends Component {
 
   componentDidMount = () => {
     const { article_id } = this.props;
-    // console.log('the params', params)
     api.getData('article', `articles/${article_id}`)
-      .then((article) => {
+      .then(({article}) => {
         this.setState({ article, isLoading: false })
       })
       .catch(( {response }) => {
@@ -32,10 +30,8 @@ class Article extends Component {
   render() {
     const { article, isLoading, errFlag, err } = this.state;
     const { article_id, loggedIn, user } = this.props;
-    // console.log(comments, 'comments in render')
     return (
       <>
-      <Header />
       {isLoading ? (<p>Loading...</p>) 
       : (
         errFlag ? (<ErrorDisplay {...err} />)
@@ -54,8 +50,6 @@ class Article extends Component {
       </>
     );
   }
-
-  // a function to show more comments/reorder them
 }
 
 export default Article;

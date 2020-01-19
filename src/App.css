@@ -4,6 +4,11 @@
   text-align: center;
 }
 
+.route {
+  position: relative;
+  top: 90px;
+}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -39,10 +44,6 @@
   }
 }
 
-.route {
-  display: grid;
-  grid-template-rows: 100px auto;
-}
 
 nav {
   display: flex;
@@ -121,6 +122,15 @@ li {
   all: unset;
   border: 1px solid black;
 
+}
+
+button.comments {
+  width: 600px;
+  display: inline-block;
+}
+
+.time-and-counts, button.comments {
+  height: 100px;
 }
 
 
