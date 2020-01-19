@@ -1,0 +1,369 @@
+
+/* ME */
+.App {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  text-align: center;
+}
+
+.text-span {
+  font-weight: bold;
+}
+
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+nav {
+  position: fixed;
+  z-index: 40;
+  width: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background: #ffc107;
+  margin: 0;
+  padding: 10px 0px
+
+}
+
+nav > a, .login-toggle {
+  width: 30%;
+}
+
+h1 {
+  /* border: 1px solid grey; */
+  position: relative;
+  top: 52px;
+  padding: 0px 8px;
+  margin: 0;
+  text-decoration: underline;
+  vertical-align: middle;
+
+}
+
+.route {
+  position: relative;
+  top: 50px;
+  margin: 0 10%;
+}
+
+.login-toggle {
+  text-align: end;
+  display: inline;
+}
+
+.login-button {
+  border: 1px dashed white;
+  padding: 5px;
+}
+
+h3, h4 {
+  margin: 5px 0;
+}
+
+p.left {
+  /* font-size: 105%; */
+  margin-top: 0;
+  text-align: left;
+}
+
+h3.left, h4.left {
+  text-align: left;
+  font-weight: bold;
+}
+
+h4.left {
+  margin: 5px 0;
+}
+
+.sort-select {
+  margin-top: 10px;
+  text-align: right;
+}
+
+select {
+
+  /* styling */
+  background-color: white;
+  border: thin solid blue;
+  border-radius: 4px;
+  display: inline-block;
+  /* font: inherit; */
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+
+  /* reset */
+
+  margin: 0;      
+  /* margin: 0 5%; */
+  text-align: right;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+
+select.minimal {
+  background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+}
+
+select.minimal:focus {
+  background-image:
+    linear-gradient(45deg, green 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, green 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 15px) 1em,
+    calc(100% - 20px) 1em,
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+  border-color: green;
+  outline: 0;
+}
+
+/* .list-gourp in Articles, and .card-list in Comments. Both for similar uls */
+.list-group {
+  margin: 0;
+}
+
+.art-big-card > h3 {
+  padding: 2% 5%;
+}
+
+.comment-card, .art-sm-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 2%;
+  text-align: center;
+}
+
+.art-sm-card {
+  border: 2px solid #029ACF;
+}
+
+.comment-card {
+  border: 2px solid #D9230F;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  /* padding: 0; */
+  margin: 12px 0;
+}
+form > textarea {
+  border: 2px dashed #469408;
+  font-size: 110%
+}
+
+.art-sm-card {
+  margin: 1% 0;
+}
+
+.comment-card {
+  margin: 2.5% 0;
+}
+
+.time-and-counts {
+  text-align: left;
+  font-size: 80%;
+  /* border-bottom: 10px */
+}
+
+.comment-card > .time-and-counts {
+  width: 140px;
+
+  /* border-bottom: 10px */
+}
+
+.art-sm-card > .time-and-counts {
+  width: 100px;
+
+  /* border-bottom: 10px */
+}
+
+.time-and-counts > p {
+  margin-top: 2px;
+  margin-bottom: 3px;
+  min-width: 180px;
+}
+
+
+.comment-card > .comment-button, .art-sm-card > .title-author {
+  /* width: 70%; */
+  /* min-width: 400px; */
+  margin-bottom: 0;
+  text-align: left;
+  padding: 1px;
+}
+
+.title-author {
+  width: 70%;
+}
+
+/* .comment {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+} */
+
+button {
+  all: unset;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover, button:hover {
+  text-decoration: underline;
+}
+
+/* button:hover {
+} */
+
+button.post-comment {
+  background: #cbcece;
+  padding: 2px 8px;
+
+}
+
+.comment-button {
+  margin: 2px 2px;
+  min-width: 250px;
+  padding: 2px;
+  text-align: left;
+  border-color: #cbcece;
+}
+
+.vote-buttons {
+  font-size: 120%;
+}
+
+
+.art-big-card > .recommend {
+  text-align: right;
+  /* margin: 0 10%; */
+  padding-bottom: 8px; 
+  border-bottom: 2px dashed #6610f2;
+}
+
+/* .vote-buttons {
+  font-size: 120%;
+  text-align: right;
+  margin: 0 10%;
+  padding-bottom: 8px; 
+  border-bottom: 1px dashed grey;
+} */
+
+/* .vote-button {
+
+} */
+
+.comment-button > p {
+  margin: 2px;
+}
+
+/* .delete-button {
+  display: flex;
+  flex-direction: column; 
+  width: 20%;
+  right: 0px;
+  border-color: grey
+} */
+.delete-button, button.no-delete, button.yes-delete {
+  background: #cbcece;
+  margin: 1px;
+  padding: 5%;
+  /* width: 15%; */
+}
+
+
+.title-author {
+  text-align: left;
+}
+
+.title-author > .topic {
+  font-weight: bold;
+  margin-top: -5px;
+  margin-bottom: 5px;
+
+}
+
+p.art-body {
+  /* width: 80%; */
+  text-align: justify;
+  padding: 2% 0;
+}
+/* .App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+} */
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+/* ME ^ */
+
+/* ul.card-list {
+
+} */
