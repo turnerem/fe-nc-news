@@ -76,3 +76,7 @@ exports.countsPerTimeUnit = (data) => {
   console.log(dateArr)
   return dateArr
 }
+
+// const simulateDates = (minYrMth, maxYrMth, n) => {
+  
+// }
