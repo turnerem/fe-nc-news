@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Articles from '../articles/Articles_old';
-import Header from '../Header';
+import Articles from '../articles/Articles';
 import { capitalize } from '../utils/utils';
 
 class Topic extends Component {
