@@ -304,10 +304,11 @@ button.post-comment {
   right: 0px;
   border-color: grey
 } */
-.delete-button, button.no-delete, button.yes-delete {
+.delete-button, .no-delete, .yes-delete {
   background: #cbcece;
-  margin: 1px;
+  margin: 2px;
   padding: 5%;
+  /* width: 40px; */
   /* width: 15%; */
 }
 

@@ -4,7 +4,7 @@ import VoteButton from '../VoteButton';
 
 const ArtBigCard = ({ article }) => {
   const { 
-    topic, title, author, 
+    title, author, 
     body,
     created_at, article_id,
     votes } = article;
@@ -18,7 +18,7 @@ const ArtBigCard = ({ article }) => {
       <p className='art-body'>
         {body}
       </p>
-      <p className='recommend'>Recommend this article? <VoteButton votes={votes} patch={patch} /></p>
+      <div className='recommend'>Recommend this article? <VoteButton votes={votes} patch={patch} /></div>
       
     </div>
   );

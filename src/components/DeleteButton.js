@@ -7,7 +7,7 @@ class DeleteButton extends Component {
   }
   render () {
     const { toDelete } = this.state;
-    const { deleteComment } = this.props;
+    const { deleteDataView } = this.props;
     if (!toDelete) {
       return (
         <button onClick={this.deleteToggle} className='delete-button'>
@@ -21,7 +21,7 @@ class DeleteButton extends Component {
         <button onClick={this.deleteToggle} className='no-delete'>
           undo
         </button>
-        <button onClick={deleteComment} className='yes-delete'>
+        <button onClick={deleteDataView} className='yes-delete'>
           definitely delete
         </button>
         </div>

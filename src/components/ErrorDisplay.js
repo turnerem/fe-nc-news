@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header';
 
 const ErrorDisplay = ({ status, msg }) => {
   const errMsg = (
@@ -11,7 +10,6 @@ const ErrorDisplay = ({ status, msg }) => {
   if (msg === 'Non-existent Path') {
     return (
       <>
-        <Header />
         {errMsg}
       </>
     )

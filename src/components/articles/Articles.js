@@ -52,7 +52,6 @@ class Articles extends Component {
   }
 
   scrollEventListener = () => {
-    console.log('in event listener')
     document.querySelector('.data-list').addEventListener('scroll', this.handleScroll)
     window.addEventListener('scroll', this.handleScroll)
   }
@@ -61,14 +60,11 @@ class Articles extends Component {
     const docOffset = document.documentElement.offsetHeight;
     const windowInner = window.innerHeight;
     const docScrollTop = document.documentElement.scrollTop
-    
-    console.log('difference: ', docOffset - windowInner - docScrollTop)
-      // 'LHS - RHS: ', window.innerHeight + document.documentElement.scrollTop - document.documentElement.offsetHeight )
+    // 'LHS - RHS: ', window.innerHeight + document.documentElement.scrollTop - document.documentElement.offsetHeight )
     const { errFlag, hasMore, isLoading } = this.state;
 
     if (errFlag || !hasMore || isLoading) return;
     if ((docOffset - windowInner - docScrollTop) < 500) {
-        console.log('condition met NOW - updating p')
         this.setState(({p}) => {
           return {p: p + 1}
         })
@@ -80,22 +76,18 @@ class Articles extends Component {
     const { value } = event.target
     const newSort = value.split(' ')[0]
     const newOrder = value.split(' ')[1]
-    console.log('sortby', newSort, 'order', newOrder)
-
     this.setState({ sort_by: newSort, order: newOrder, p: 1 })
 
   }
 
   fetchData = () => {
     const { sort_by, order, p, loadedArticles } = this.state;
-    console.log('page updating?', p)
     const { topic } = this.props;
     const params = {sort_by, order, topic, p}
 
     api.getData('articles', 'articles', params, true)
       .then(({ articles, total_count }) => {
         const freshArticles = (p === 1) ? articles : [...loadedArticles, ...articles]
-       console.log('tot articles on page now: ', freshArticles.length)
         this.setState({ 
           loadedArticles: freshArticles, 
           total_count, 

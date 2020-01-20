@@ -20,13 +20,12 @@ class CommentCard extends Component {
             <p className='created-at'>{formatTimeDate(created_at)}</p>
             <VoteButton votes={votes} patch={patch}/>
           </div>
-          {/* <div className='comment alert alert-dismissible alert-light'> */}
             <button onClick={this.resizeText} className='comment-button'>
               <p><span className='text-span'>{author}:</span> {newBody}</p>
             </button>
+            {/* {console.log('comment id to delete', comment_id)} */}
             {(user === author) && (<DeleteButton deleteDataView={() => deleteDataView(comment_id)} />)}
 
-          {/* </div> */}
       </li>
     );
   }
