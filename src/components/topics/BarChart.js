@@ -48,10 +48,10 @@ class BarChart extends Component {
 
             svgTopics.selectAll('rect')
               .transition()
-              .duration(800)
+              .duration(900)
               .attr('y', (d) => height - d * scale)
               .attr('height', (d) => height * scale)
-              .delay((d, i) => {return i * 100})
-                }
+              .delay((d, i) => {return i * 30})
+            }
 }
 export default BarChart

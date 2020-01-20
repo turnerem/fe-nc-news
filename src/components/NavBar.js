@@ -3,8 +3,6 @@ import { Link } from '@reach/router'
 import Header from './Header';
 
 const NavBar = ({ user, toggleLogUserIn }) => {
-  console.log(user, 'user in nav')
-
   return (
     <div>
       <nav className='navbar navbar-expand-lg navbar-light bg-light'>

@@ -30,7 +30,6 @@ class Comments extends Component {
   }
 
   componentDidUpdate(prevProps, {sort_by, order, newPost, toDelete}) {
-    console.log('COMPONENTDIDUPDATE? new comment?: ', this.state.newPost)
     const newSort = sort_by !== this.state.sort_by
     const newOrder = order !== this.state.order
     if ( newSort || newOrder ) { this.fetchData() }
@@ -44,8 +43,6 @@ class Comments extends Component {
     const somethingToPost = (newPost !== '')
     if ( somethingToPost ) {
       this.postData(newNewPost)
-      // this.setState({newPost: ''})
-      // this.fetchData()
     }
   }
 
@@ -73,8 +70,7 @@ class Comments extends Component {
   }
 
   handlePost = (textBox) => {
-    // event.preventDefault();
-    console.log('\n\n\nSET STATE new value', textBox) 
+
     if (textBox.length > 0) {
       const { user } = this.props
       const {newId} = this.state;

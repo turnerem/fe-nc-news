@@ -33,7 +33,6 @@ class App extends Component {
   }
 
   toggleLogUserIn = () => {
-    console.log('clicked!')
     this.setState(({loggedIn}) => {
       return loggedIn ? { loggedIn: false, user: ''} : { loggedIn: true, user: 'jessjelly'}
     })

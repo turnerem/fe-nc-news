@@ -12,7 +12,8 @@ class VoteButton extends Component {
     if (voted) {
       api.patchData(key, endpoint, { inc_votes: this.state.inc_votes })
         .then(response => {
-          console.log('data from response', response)
+          // console.log('data from response', response)
+          return
         })
         .catch(err => console.log('an error', err))
       // handle success/ catch error (COLOURS) 
@@ -36,7 +37,6 @@ class VoteButton extends Component {
   }
   
   aVote = (voteDir) => {
-    console.log(voteDir, 'value on CLICK!')
     this.setState(({ inc_votes}) => {
       const total = inc_votes + voteDir;
       if (total > 1) return {inc_votes : 1}
