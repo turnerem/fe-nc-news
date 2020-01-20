@@ -26,25 +26,15 @@ class Comments extends Component {
     this.scrollEventListener();
   }
 
-  componentDidUpdate(prevProps, {sort_by, order}) {
+  componentDidUpdate(prevProps, {sort_by, order, loadedDocs}) {
     const newSort = sort_by !== this.state.sort_by
     const newOrder = order !== this.state.order
     if ( newSort || newOrder ) { this.fetchData() }
+ 
+    const lessArticlesNow = this.state.loadedDocs.length < loadedDocs.length
+    if (lessArticlesNow ) {this.deleteData()}
+
   }
-
-  // componentDidUpdate = (prevProps, { comments }) => {
-  //   if (comments.length > this.state.comments.length) {
-  //     api.deleteData(`comments/${this.state.toDelete}`)
-  //       .then((data) => {
-  //       })
-  //       .catch(err => {console.log('an err', err)})
-
-  //     this.setState({ toDelete: null })
-      
-  //   }
-
-  // }
-
 
   render() {
     const { errFlag, err, hasMore, isLoading, loadedDocs, countChange } = this.state;
@@ -58,7 +48,7 @@ class Comments extends Component {
         <SortDocs handleSort={this.handleSort} />
         <ul className='card-list'>
            {loadedDocs.map((doc) => {
-             return <CommentCard comment={doc} currentUser={user} key={`new_comment${Math.random}`} deleteComment={this.deleteComment}/>
+             return <CommentCard comment={doc} user={user} key={`new_comment${Math.random}`} deleteDataView={this.deleteDataView}/>
            })}
         </ul>
         <hr />
@@ -73,10 +63,9 @@ class Comments extends Component {
     event.preventDefault();
     const { value } = event.target[0]
     if (value.length > 0) {
-      const { currentUser } = this.state
-      const { article_id } = this.props
+      const { article_id, user } = this.props
       const userComment = {
-        author: currentUser,
+        author: user,
         body: value,
         created_at: Date.now(),
         votes: 0,
@@ -150,10 +139,9 @@ class Comments extends Component {
   }
 
   postData = (body) => {
-    const { article_id } = this.props
-    const { currentUser } = this.state
+    const { article_id, user } = this.props
       
-    const toPost = {username: currentUser, body}
+    const toPost = {username: user, body}
     api.postData('comment', `articles/${article_id}/comments`, 
       toPost)
         .then(response => {
@@ -163,8 +151,9 @@ class Comments extends Component {
 
   }
 
-  deleteData = (id) => {
-    console.log('back in comments with ', this.state.currentUser)
+
+  deleteDataView = (id) => {
+    console.log('back in comments with ', this.propr.user)
     this.setState((currentState) => {
       const { loadedDocs, countChange } = currentState;
       const newLoadedDocs = loadedDocs.filter(doc => {
@@ -172,7 +161,18 @@ class Comments extends Component {
       })
       return { loadedDocs: newLoadedDocs, toDelete: id, countChange: countChange - 1}
     })
+
   }
+
+  deleteData = (id) => {
+    api.deleteData(`comments/${id}`)
+      .then(() => {
+        console.log('deleted. do something with colours here')
+      })
+      .catch(err => <ErrorDisplay {...err} />)
+    this.setState({ toDelete: null })    
+  }
+  
 }
 
 export default Comments;

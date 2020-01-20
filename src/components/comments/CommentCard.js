@@ -9,7 +9,7 @@ class CommentCard extends Component {
     commentSm: true
   }
   render() {
-    const { currentUser, comment, deleteComment } = this.props;
+    const { user, comment, deleteDataView } = this.props;
     const { author, body, created_at, votes, comment_id } = comment;
     const { commentSm } = this.state;
     const patch = { key: 'comment', endpoint: `comments/${comment_id}`}
@@ -24,7 +24,7 @@ class CommentCard extends Component {
             <button onClick={this.resizeText} className='comment-button'>
               <p><span className='text-span'>{author}:</span> {newBody}</p>
             </button>
-            {(currentUser === author) && (<DeleteButton deleteComment={() => deleteComment(comment_id)} />)}
+            {(user === author) && (<DeleteButton deleteDataView={() => deleteDataView(comment_id)} />)}
 
           {/* </div> */}
       </li>
