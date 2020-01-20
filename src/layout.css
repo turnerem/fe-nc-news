@@ -248,7 +248,7 @@ a {
   color: black;
 }
 
-a:hover, button:hover {
+a:hover, button:hover, a:focus, button:focus {
   text-decoration: underline;
 }
 
