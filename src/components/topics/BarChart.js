@@ -4,13 +4,23 @@ import * as d3 from 'd3'
 import * as fakeData from './fakeData'
 
 class BarChart extends Component {
-    
+    state = {
+        _isMounted: false
+    }
 
     componentDidMount() {
+        this.setState(({_isMounted}) => {
+            return {_isMounted: true}
+        })
         const { topic } = this.props;
         const data = fakeData[topic]
         this.drawBarChart(data)
     }
+
+    componentWilUnmount() {
+        this.setState(({_isMounted}) => {
+            return {_isMounted: false}
+        })    }
     render() { 
         return <div ref="canvas5"></div> 
     }
@@ -48,7 +58,7 @@ class BarChart extends Component {
 
             svgTopics.selectAll('rect')
               .transition()
-              .duration(900)
+              .duration(950)
               .attr('y', (d) => height - d * scale)
               .attr('height', (d) => height * scale)
               .delay((d, i) => {return i * 30})

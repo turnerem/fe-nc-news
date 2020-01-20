@@ -40,8 +40,9 @@ class Comments extends Component {
 
     
     const newNewPost = this.state.newPost;
-    const somethingToPost = (newPost !== '')
+    const somethingToPost = (newNewPost !== '')
     if ( somethingToPost ) {
+
       this.postData(newNewPost)
     }
   }
@@ -49,6 +50,7 @@ class Comments extends Component {
   render() {
     const { errFlag, err, hasMore, isLoading, loadedDocs, countChange, newPost } = this.state;
     const { comment_count, loggedIn, user } = this.props;
+
     return (
       <section className='data-list'>
         <h4 className='left'>Comments</h4>
@@ -70,7 +72,6 @@ class Comments extends Component {
   }
 
   handlePost = (textBox) => {
-
     if (textBox.length > 0) {
       const { user } = this.props
       const {newId} = this.state;
@@ -149,7 +150,7 @@ class Comments extends Component {
     // const { loadedDocs } = this.state
       
     const newPost = {username: user, body}
-    console.log('POST setting new state', newPost)
+
     api.postData('comment', `articles/${article_id}/comments`, 
       newPost)
         .then(newPost => {
@@ -181,7 +182,7 @@ class Comments extends Component {
         
         console.log('DELETE deleted. do something with colours here')
       })
-      .catch(err => <ErrorDisplay {...err} />)
+      .catch(err => console.log(err))
     
   }
 
