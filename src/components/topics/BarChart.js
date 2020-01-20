@@ -9,7 +9,6 @@ class BarChart extends Component {
     componentDidMount() {
         const { topic } = this.props;
         const data = fakeData[topic]
-        console.log('ths data', data)
         this.drawBarChart(data)
     }
     render() { 
@@ -17,9 +16,8 @@ class BarChart extends Component {
     }
     drawBarChart(data)  {
         
-        const margin = {top: 10, right: 30, bottom: 90, left: 40},
-        width = 450,
-        height = 85;
+        const width = 450,
+          height = 85;
                
             const scale = 2
             const svgTopics = d3.select(this.refs.canvas5)
@@ -53,7 +51,7 @@ class BarChart extends Component {
               .duration(800)
               .attr('y', (d) => height - d * scale)
               .attr('height', (d) => height * scale)
-              .delay((d, i) => {console.log(i); return i * 100})
+              .delay((d, i) => {return i * 100})
                 }
 }
 export default BarChart

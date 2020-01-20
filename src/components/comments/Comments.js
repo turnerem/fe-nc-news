@@ -17,35 +17,40 @@ class Comments extends Component {
     p: 1,
     toDelete: null,
     countChange: 0,
-    newId: 1
+    newId: 1,
+    // newComment: false,
+
+    newPost: ''
 
   }
 
   componentDidMount = () => {
-    console.log('mounting')
     this.fetchData()
     this.scrollEventListener();
   }
 
-  componentDidUpdate(prevProps, {sort_by, order, loadedDocs}) {
+  componentDidUpdate(prevProps, {sort_by, order, newPost, toDelete}) {
+    console.log('COMPONENTDIDUPDATE? new comment?: ', this.state.newPost)
     const newSort = sort_by !== this.state.sort_by
     const newOrder = order !== this.state.order
     if ( newSort || newOrder ) { this.fetchData() }
  
-    // const lessArticlesNow = this.state.loadedDocs.length < loadedDocs.length
-    // if (lessArticlesNow ) {this.deleteData()}
+    const newDeleteId = this.state.toDelete
+    const somethingToDelete = newDeleteId !== toDelete;
+    if (somethingToDelete) {this.deleteData(newDeleteId)}
+
     
-    const moreArticlesNow = this.state.loadedDocs.length > loadedDocs.length
-    const newDoc = this.state.loadedDocs[0];
-    if (moreArticlesNow) {
-      this.postData(newDoc)
-      
+    const newNewPost = this.state.newPost;
+    const somethingToPost = (newPost !== '')
+    if ( somethingToPost ) {
+      this.postData(newNewPost)
+      // this.setState({newPost: ''})
+      // this.fetchData()
     }
-    
   }
 
   render() {
-    const { errFlag, err, hasMore, isLoading, loadedDocs, countChange } = this.state;
+    const { errFlag, err, hasMore, isLoading, loadedDocs, countChange, newPost } = this.state;
     const { comment_count, loggedIn, user } = this.props;
     return (
       <section className='data-list'>
@@ -55,8 +60,8 @@ class Comments extends Component {
         
         <SortDocs handleSort={this.handleSort} />
         <ul className='card-list'>
-           {loadedDocs.map((doc) => {
-             return <CommentCard comment={doc} user={user} key={doc.comment_id} deleteDataView={this.deleteDataView}/>
+           {loadedDocs.map((doc, i) => {
+             return <CommentCard comment={doc} user={user} key={i} newPost={newPost} deleteDataView={this.deleteDataView} idxToDelete={i}/>
            })}
         </ul>
         <hr />
@@ -67,26 +72,27 @@ class Comments extends Component {
       );
   }
 
-  handlePost = (event) => {
-    event.preventDefault();
-    const { value } = event.target[0]
-    if (value.length > 0) {
-      const { article_id, user } = this.props
+  handlePost = (textBox) => {
+    // event.preventDefault();
+    console.log('\n\n\nSET STATE new value', textBox) 
+    if (textBox.length > 0) {
+      const { user } = this.props
       const {newId} = this.state;
       const userCommentView = {
         author: user,
-        body: value,
+        body: textBox,
         created_at: Date.now(),
         votes: 0,
-        comment_id: 10000 + newId,
-        article_id
+        comment_id: 10000 + newId
       }
       this.setState(({loadedDocs, countChange}) => {
         const newDocs = [...loadedDocs]
-        newDocs.unshift(userCommentView)        
-        return { loadedDocs: newDocs, countChange: countChange + 1, newId: newId + 1 }
+        newDocs.unshift(userCommentView)    
+
+        return { loadedDocs: newDocs, countChange: countChange + 1, newId: newId + 1, newPost: textBox }
       })
       
+        
 
     }
   }
@@ -144,45 +150,45 @@ class Comments extends Component {
 
   postData = (body) => {
     const { article_id, user } = this.props
+    // const { loadedDocs } = this.state
       
-    const toPost = {username: user, body}
+    const newPost = {username: user, body}
+    console.log('POST setting new state', newPost)
     api.postData('comment', `articles/${article_id}/comments`, 
-      toPost)
-        // .then(response => {
-        //   console.log(response, 'response after posting')
-        // })
+      newPost)
+        .then(newPost => {
+          this.setState(({loadedDocs}) => {
+            // const {  } = currentState;
+            return { loadedDocs: [newPost, ...loadedDocs.slice(1)], newPost: ''}
+          })
+        })
         .catch(err => <ErrorDisplay {...err}/>)
 
   }
 
 
-  deleteDataView = (id) => {
-    this.setState((currentState) => {
-      const { loadedDocs, countChange } = currentState;
-      const newLoadedDocs = loadedDocs.filter(doc => {
-        return doc.comment_id !== id
-      })
-      return { loadedDocs: newLoadedDocs, toDelete: id, countChange: countChange - 1}
+  deleteDataView = (idx) => {
+    this.setState(({ loadedDocs, countChange }) => {
+      const toDelete = loadedDocs[idx].comment_id;
+      loadedDocs.splice(idx, 1)
+      
+      return { loadedDocs, toDelete, countChange: countChange - 1}
+      
     })
 
-    api.deleteData(`comments/${id}`)
-      // .then(() => {
-      //   console.log('deleted. do something with colours here')
-      // })
-      .catch(err => <ErrorDisplay {...err} />)
-    this.setState({ toDelete: null })   
-
+    
   }
 
-  // deleteData = (id) => {
-  //   api.deleteData(`comments/${id}`)
-  //     // .then(() => {
-  //     //   console.log('deleted. do something with colours here')
-  //     // })
-  //     .catch(err => <ErrorDisplay {...err} />)
-  //   this.setState({ toDelete: null })    
-  // }
-  
+  deleteData = (id) => {
+    api.deleteData(`comments/${id}`)
+      .then(() => {
+        
+        console.log('DELETE deleted. do something with colours here')
+      })
+      .catch(err => <ErrorDisplay {...err} />)
+    
+  }
+
 }
 
 export default Comments;

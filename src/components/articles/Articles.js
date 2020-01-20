@@ -37,7 +37,7 @@ class Articles extends Component {
          <ul className='list-group'>
           {
             loadedArticles.map(article => {
-              return <ArtSmCard article={article} key={loadedArticles.article_id}/>
+              return <ArtSmCard article={article} key={article.article_id}/>
             })
           }
         </ul>
