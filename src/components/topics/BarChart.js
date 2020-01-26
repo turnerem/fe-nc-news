@@ -7,7 +7,7 @@ class BarChart extends Component {
 
     componentDidMount() {
         const { topic } = this.props;
-        const dataSel = (document.getElementById('canvas5').offsetWidth < 650) ? data[topic].slice(-10) : data[topic]
+        const dataSel = (document.getElementById('canvas5').offsetWidth < 650) ? data[topic].slice(-11) : data[topic]
         this.drawBarChart(dataSel)
     }
 
