@@ -8,11 +8,11 @@ The website demonstrates my ability to work with React and Javascript. Some key 
 - ability to post a comment
 - ability to sort articles and comments by date/popularity/etc
 
-NOTE: This is not a real news site. The users are fictional, articles are ridiculous, and comments are entirely spurious. 
+NOTE: This is not a real news site. The users are fictional, articles are ridiculous, and comments are spurious. 
 
 ___
 
-The backend of the NC News app is another portfolio piece that I completed at Northcoders. That's also on Heroku, [here](https://whispering-river-81489.herokuapp.com/api). The Git repo is [here](https://github.com/turnerem/be-nc-news).
+The backend of the NC News app is another portfolio piece that I completed at Northcoders. That's also on Heroku, [here](https://whispering-river-81489.herokuapp.com/api). The GitHub repo is [here](https://github.com/turnerem/be-nc-news).
 ___ 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
