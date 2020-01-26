@@ -3,7 +3,6 @@
   - Would need to try having authentication area.
 - Or default login jessjelly
 
-- making requests to heroku: read notes to solve CORS error
 - make most of routing - to make site feel bigger
 - read into hooks. To use?
 

@@ -3,7 +3,7 @@ import { Link } from '@reach/router'
 import { capitalize } from '../utils/utils'
 import BarChart from './BarChart';
 
-const TopicCard = ({ topic }) => {
+const TopicCard = ({ topic, idx }) => {
   const { slug, description } = topic;
   return (
     <li className='topic-card'>
@@ -12,7 +12,8 @@ const TopicCard = ({ topic }) => {
         <p></p>
 
       </Link>
-      <BarChart topic={slug} />
+
+      <BarChart topic={slug} idx={idx} />
     </li>
   );
 };

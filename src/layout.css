@@ -12,8 +12,15 @@
   font-weight: bold;
 }
 
-.topic-card {
-  margin-top: 15px;
+
+.white-axis line {
+  stroke: white;
+}
+.white-axis path {
+  stroke: white;
+}
+.white-axis text {
+  stroke: white;
 }
 
 ul {
@@ -157,14 +164,22 @@ select.minimal:focus {
   padding: 2% 5%;
 }
 
+.comment-card, .art-sm-card, .topic-card {
+  border-radius: 5px;
+  padding: 2%;
+  text-align: center;
+}
+
 .comment-card, .art-sm-card {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  border-radius: 5px;
-  padding: 2%;
-  text-align: center;
+}
+
+.topic-card {
+  margin-top: 15px;
+  border: 2px solid #18BC9C;
 }
 
 .art-sm-card {
@@ -174,6 +189,8 @@ select.minimal:focus {
 .comment-card {
   border: 2px solid #D9230F;
 }
+
+
 
 form {
   display: flex;
@@ -304,12 +321,18 @@ button.post-comment {
   right: 0px;
   border-color: grey
 } */
+.delete-button, .def-delete {
+  /* margin: 2px;
+  padding: 5%; */
+  width: 100px;
+  /* width: 15%; */
+}
+
 .delete-button, .no-delete, .yes-delete {
   background: #cbcece;
   margin: 2px;
-  padding: 5%;
-  /* width: 40px; */
-  /* width: 15%; */
+  /* padding: 5%; */
+  width: 100px;
 }
 
 
