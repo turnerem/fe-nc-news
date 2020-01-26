@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import './bootstrap-flatly.css';
 import './layout.css';
 import { Router } from '@reach/router'
 import Home from './components/Home';
