@@ -17,7 +17,7 @@ class Topics extends Component {
     const { topics } = this.state;
     return (
       <div>
-        <h3 className='left'>All Topics</h3>
+        <h3 className='left'>All Topics (trend data is fictional)</h3>
         <ul>
           {topics.map((topic, idx) => {
             return <TopicCard topic={topic} key={topic.slug} idx={idx} />

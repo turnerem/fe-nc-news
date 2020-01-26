@@ -4,47 +4,14 @@ import * as d3 from 'd3'
 import * as data from './fakeData.js'
 
 class BarChart extends Component {
-    // state = {
-    //     _isMounted: false
-    // }
 
     componentDidMount() {
-        // this.setState(({_isMounted}) => {
-        //     return {_isMounted: true}
-        // })
-        console.log(this.props.idx, 'idx in BarChart')
-
-    //     d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv", function(data) {
-    //         console.log('data from eg', data)
-    // })
-
-        // d3.csv('./fakeData.csv')
-        //   .then(data => {
-        //       console.log('new fake data', data)
-        //   })
-        
         const { topic } = this.props;
-        // console.log('idx', this.props.idx)
-        // for (let key in data) {
-
-        //     console.log(key)
-        // }
-        // const topicData = data.filter(obj => {
-        //     return obj.hasOwnProperty(topic)
-        // })
-        // // const data = JSON.parse(fakeData)
-        console.log(data[topic].length, 'length of data?')
-        this.drawBarChart(data[topic])
+        const dataSel = (document.getElementById('canvas5').offsetWidth < 650) ? data[topic].slice(-10) : data[topic]
+        this.drawBarChart(dataSel)
     }
 
-    // componentWilUnmount() {
-    //     this.setState(({_isMounted}) => {
-    //         return {_isMounted: false}
-    //     })
-    // }
-
     render() { 
-        console.log('rendering!')
         return <div ref="canvas5" id='canvas5'></div> 
     }
     drawBarChart(data)  {
@@ -52,11 +19,11 @@ class BarChart extends Component {
           width = document.getElementById('canvas5').offsetWidth * .9,
           height = 135 - margin.bottom;
 
-          const colWidth = width / 30;
+          const colWidth = width / data.length;
 
           const xAxisLabels = []
           const cols = []
-          for (let i = 0; i < 31; i++) {
+          for (let i = 0; i < data.length; i++) {
               if (i === 0) { xAxisLabels.unshift('today'); cols.unshift('black') }
               else if (i / 7 === 1) { xAxisLabels.unshift('1 week ago'); cols.unshift('black') }
               else if (i % 7 === 0) { xAxisLabels.unshift(`${i / 7} weeks ago`) ; cols.unshift('black') }
@@ -67,7 +34,6 @@ class BarChart extends Component {
           xAxisLabels.forEach((label, i) => {
               xyData.push({Time: label, Count: data[i], colour: cols[i]})
             })
-            console.log('xy data', xyData)
             
             // const scale = 2
             const svgTopics = d3.select(this.refs.canvas5)

@@ -23,6 +23,18 @@
   stroke: white;
 }
 
+/* @media only screen and (max-width: 880px) {
+
+  .x-axis text {
+    stroke: white;
+  }
+  /* .x-axis line {
+    stroke: white;
+  } */
+  
+
+
+
 ul {
   list-style: none;
   padding-left: 0;
