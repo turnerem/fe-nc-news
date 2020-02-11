@@ -12,7 +12,7 @@ class VoteButton extends Component {
     if (voted) {
       api.patchData(key, endpoint, { inc_votes: this.state.inc_votes })
         .then(response => {
-          // console.log('data from response', response)
+          
           return
         })
         .catch(err => console.log('an error', err))

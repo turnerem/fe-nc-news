@@ -8,7 +8,7 @@ class PostComment extends Component {
     const { handlePost } = this.props
     const { textBox } = this.state
     // submittedPost && this.setState({ textBox: '' })
-    // console.log('HANDLING POST')
+    
     return (
       <form onSubmit={(event) => {
           event.preventDefault()
